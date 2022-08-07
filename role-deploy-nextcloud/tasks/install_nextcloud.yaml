@@ -1,0 +1,23 @@
+- name: Install packages
+  dnf: 
+    name: "{{ nextcloud_packages }}"
+    state: latest
+
+- name: Download NextCloud 
+  get_url:
+    url: "{{ url_nextcloud }}"
+    dest: "{{ download_path }}"
+
+- name: Unpacking the downloaded archive
+  unarchive:
+    src: "{{ download_path }}/nextcloud-20.0.1.zip"
+    dest: /var/www/
+    remote_src: yes 
+  
+- name: Setting access rights
+  file:
+    path: /var/www/nextcloud
+    state: directory
+    recurse: yes 
+    owner: apache
+    group: apache

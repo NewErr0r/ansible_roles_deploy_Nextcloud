@@ -9,3 +9,7 @@ pass_user_db: "nextcloud"
 
 ### NGINX ###
 nginx_server_name: "nextcloud.test.local" 
+
+### NextCloud ###
+url_nextcloud: "https://download.nextcloud.com/server/releases/nextcloud-20.0.1.zip"
+download_path: /root

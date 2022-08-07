@@ -22,3 +22,7 @@ packages_php:
 www_conf: /etc/php-fpm.d/www.conf
 nextcloud_conf: /etc/nginx/conf.d/nextcloud.conf
 path_ssl: /etc/nginx/ssl
+
+nextcloud_packages:
+  - wget 
+  - unzip
