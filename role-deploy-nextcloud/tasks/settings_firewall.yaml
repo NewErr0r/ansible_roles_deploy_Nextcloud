@@ -1,0 +1,22 @@
+- name: Permit http and https traffic
+  firewalld:
+    service: "{{ item }}"
+    permanent: yes
+    state: enabled 
+  loop: 
+    - http
+    - https 
+  notify:
+    - Restarted Firewalld
+
+- name: Disable SELinux now
+  shell:  | 
+    setenforce 0 
+  when: 
+    - ansible_selinux.status == "enabled"
+
+- name: Desable SELinux 
+  ansible.posix.selinux:
+    state: disabled
+  when: 
+    - ansible_selinux.status == "enabled"

@@ -1,0 +1,8 @@
+---
+timezone: "Europe/Moscow"
+
+### MariaDB ###
+mysql_root_pass: "P@ssw0rd"
+name_db: "nextcloud"
+user_db: "nextcloud"
+pass_user_db: "nextcloud"

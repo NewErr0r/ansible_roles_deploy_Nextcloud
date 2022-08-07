@@ -1,0 +1,21 @@
+---
+- name: Install Chrony
+  dnf: 
+    name: chrony 
+    state: latest
+
+- name: Started and Enabled Chrony 
+  service: 
+    name: chronyd 
+    enabled: true 
+    state: started 
+
+- name: Configure Timezone
+  shell:  | 
+    timedatectl set-timezone "{{ timezone }}"
+
+- name: Configure Firewall
+  include_tasks: settings_firewall.yaml
+
+- name: Configuring the Database Server
+  include_tasks: settings_mariadb.yaml
