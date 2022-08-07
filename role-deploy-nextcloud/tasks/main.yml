@@ -19,3 +19,6 @@
 
 - name: Configuring the Database Server
   include_tasks: settings_mariadb.yaml
+
+- name: Installing and configuring a web server
+  include_tasks: settings_web_server.yaml

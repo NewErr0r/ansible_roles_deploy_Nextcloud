@@ -1,0 +1,42 @@
+- name: Install packages PHP and PHP-FPM
+  dnf: 
+    name: "{{ packages_php }}"
+    state: latest
+
+- name: Configure file "www.conf"
+  file:
+    src: www.conf
+    dest: "{{ www_conf }}"
+
+- name: Started and Enabled PHP-FPM
+  service: 
+    name: php-fpm 
+    enabled: true 
+    state: started
+
+- name: Install NGINX
+  dnf: 
+    name: nginx 
+    state: latest
+
+- name: Creating a virtual domain and configuring it to work with a cloud service in NGINX
+  template:
+    src: nextcloud.conf.j2
+    dest: "{{ nextcloud_conf }}"
+
+- name: Creating a directory for storing certificates
+  file:
+    path: "{{ path_ssl }}"
+    state: directory
+    recurse: yes 
+
+- name: Generating a certificate
+  shell:  |
+    cd /etc/nginx/ssl
+    openssl req -new -x509 -days 1461 -nodes -out cert.pem -keyout cert.key -subj "/C=RU/ST=SPb/L=SPb/O=Global Security/OU=IT Department/CN={{ nextcloud_conf }}/CN=nextcloud"
+
+- name: Started and Enabled NGINX
+  service: 
+    name: nginx 
+    enabled: true 
+    state: started

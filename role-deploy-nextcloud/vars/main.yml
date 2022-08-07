@@ -2,3 +2,23 @@
 packages_mariadb:
   - mariadb-server
   - python3-PyMySQL
+
+packages_php:
+  - php 
+  - php-fpm 
+  - php-pdo 
+  - php-zip 
+  - php-dom 
+  - php-intl 
+  - php-gd 
+  - php-mysqli 
+  - php-mbstring 
+  - php-json 
+  - php-process 
+  - php-bcmath 
+  - php-gmp 
+  - php-opcache
+
+www_conf: /etc/php-fpm.d/www.conf
+nextcloud_conf: /etc/nginx/conf.d/nextcloud.conf
+path_ssl: /etc/nginx/ssl
